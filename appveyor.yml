@@ -1,0 +1,48 @@
+version: 1.0.{build}
+image: Visual Studio 2015
+
+environment:
+  matrix:
+  - STATIC: YES
+  - STATIC: NO
+
+platform:
+- x86
+- x64
+
+build_script:
+- cmd: >-
+    if "%STATIC%" == "YES" (
+        set STATIC=-static
+    ) else (
+        set "STATIC= "
+    )
+    reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set OS=32BIT || set OS=64BIT
+    If %OS% == 64BIT (
+        set EPICS_HOST_ARCH=windows-x64%STATIC%
+        set COMPILER=amd64
+    ) ELSE (
+        set EPICS_HOST_ARCH=win32-x86%STATIC%
+        set COMPILER=x86
+    )
+    "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\"vcvarsall %COMPILER%
+    C:\MinGW\bin\mingw32-make
+
+test_script:
+- cmd: >-
+    if "%STATIC%" == "YES" (
+        set STATIC=-static
+    ) else (
+        set "STATIC= "
+    )
+    reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set OS=32BIT || set OS=64BIT
+    If %OS% == 64BIT (
+        set EPICS_HOST_ARCH=windows-x64%STATIC%
+        set COMPILER=amd64
+    ) ELSE (
+        set EPICS_HOST_ARCH=win32-x86%STATIC%
+        set COMPILER=x86
+    )
+    "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\"vcvarsall %COMPILER%
+    C:\MinGW\bin\mingw32-make runtests
+    
