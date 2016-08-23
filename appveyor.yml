@@ -1,5 +1,7 @@
 version: 1.0.{build}
-image: Visual Studio 2015
+image:
+- Visual Studio 2015
+- Visual Studio 2013
 
 environment:
   matrix:
@@ -12,11 +14,8 @@ platform:
 
 build_script:
 - cmd: >-
-    if "%STATIC%" == "YES" (
-        set STATIC=-static
-    ) else (
-        set "STATIC= "
-    )
+    set "STATIC= "
+    if "%STATIC%" == YES set STATIC=-static
     reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set OS=32BIT || set OS=64BIT
     If %OS% == 64BIT (
         set EPICS_HOST_ARCH=windows-x64%STATIC%
@@ -25,16 +24,20 @@ build_script:
         set EPICS_HOST_ARCH=win32-x86%STATIC%
         set COMPILER=x86
     )
-    "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\"vcvarsall %COMPILER%
+    for /l %%X in (14,-1,8) do (
+        if exist "C:\Program Files (x86)\Microsoft Visual Studio %%X.0\VC\vcvarsall.bat" (
+            "C:\Program Files (x86)\Microsoft Visual Studio %%X.0\VC\vcvarsall.bat" %COMPILER%
+            goto :BUILD
+        )
+    )
+    :BUILD
     C:\MinGW\bin\mingw32-make
 
 test_script:
 - cmd: >-
-    if "%STATIC%" == "YES" (
-        set STATIC=-static
-    ) else (
-        set "STATIC= "
-    )
+    set "STATIC= "
+    if "%STATIC%" == YES set STATIC=-static
+    if exist
     reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set OS=32BIT || set OS=64BIT
     If %OS% == 64BIT (
         set EPICS_HOST_ARCH=windows-x64%STATIC%
@@ -43,6 +46,12 @@ test_script:
         set EPICS_HOST_ARCH=win32-x86%STATIC%
         set COMPILER=x86
     )
-    "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\"vcvarsall %COMPILER%
+    for /l %%X in (14,-1,8) do (
+        if exist "C:\Program Files (x86)\Microsoft Visual Studio %%X.0\VC\vcvarsall.bat" (
+            "C:\Program Files (x86)\Microsoft Visual Studio %%X.0\VC\vcvarsall.bat" %COMPILER%
+            goto :BUILD
+        )
+    )
+    :BUILD
     C:\MinGW\bin\mingw32-make runtests
     
