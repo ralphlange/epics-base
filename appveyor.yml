@@ -13,7 +13,7 @@ platform:
 - x64
 
 build_script:
-- cmd: >-
+- cmd: |
     set "STATIC= "
     if "%STATIC%" == YES set STATIC=-static
     reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set OS=32BIT || set OS=64BIT
@@ -34,10 +34,9 @@ build_script:
     C:\MinGW\bin\mingw32-make
 
 test_script:
-- cmd: >-
+- cmd: |
     set "STATIC= "
     if "%STATIC%" == YES set STATIC=-static
-    if exist
     reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set OS=32BIT || set OS=64BIT
     If %OS% == 64BIT (
         set EPICS_HOST_ARCH=windows-x64%STATIC%
