@@ -14,14 +14,14 @@ platform:
 
 build_script:
 - cmd: |
-    set "STATIC= "
-    if /i "%STATIC%"=="YES" set STATIC=-static
+    set "ST= "
+    if /i "%STATIC%"=="YES" set ST=-static
     reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set OS=32BIT || set OS=64BIT
-    If "%OS%"=="64BIT" (
-        set EPICS_HOST_ARCH=windows-x64"%STATIC%"
+    if "%OS%"=="64BIT" (
+        set EPICS_HOST_ARCH=windows-x64%ST%
         set COMPILER=amd64
-    ) ELSE (
-        set EPICS_HOST_ARCH=win32-x86"%STATIC%"
+    ) else (
+        set EPICS_HOST_ARCH=win32-x86%ST%
         set COMPILER=x86
     )
     for /l %%X in (14,-1,8) do (
@@ -35,14 +35,14 @@ build_script:
 
 test_script:
 - cmd: |
-    set "STATIC= "
-    if /i "%STATIC%"=="YES" set STATIC=-static
+    set "ST= "
+    if /i "%STATIC%"=="YES" set ST=-static
     reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set OS=32BIT || set OS=64BIT
-    If "%OS%"=="64BIT" (
-        set EPICS_HOST_ARCH=windows-x64"%STATIC%"
+    if "%OS%"=="64BIT" (
+        set EPICS_HOST_ARCH=windows-x64%ST%
         set COMPILER=amd64
-    ) ELSE (
-        set EPICS_HOST_ARCH=win32-x86"%STATIC%"
+    ) else (
+        set EPICS_HOST_ARCH=win32-x86%ST%
         set COMPILER=x86
     )
     for /l %%X in (14,-1,8) do (
