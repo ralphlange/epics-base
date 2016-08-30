@@ -11,12 +11,24 @@ if /i "%CONFIGURATION%"=="static" set ST=-static
 set OS=64BIT
 if "%PLATFORM%"=="x86" set OS=32BIT
 
+set "VSINSTALL=C:\Program Files (x86)\Microsoft Visual Studio %TOOLCHAIN%"
+
 if "%OS%"=="64BIT" (
     set EPICS_HOST_ARCH=windows-x64%ST%
-    set "PATH=C:\Program Files (x86)\Microsoft Visual Studio %TOOLCHAIN%\VC\bin\amd64;%PATH%"
+    if exist "%VSINSTALL%\VC\bin\amd64\vcvars64.bat" (
+        call "%VSINSTALL%\VC\bin\amd64\vcvars64.bat"
+    ) else (
+        set "INCLUDE=%VSINSTALL%\VC\include;%INCLUDE%"
+        set "PATH=%VSINSTALL%\VC\bin\amd64;%PATH%"
+    )
 ) else (
     set EPICS_HOST_ARCH=win32-x86%ST%
-    if exist "C:\Program Files (x86)\Microsoft Visual Studio %TOOLCHAIN%\Common7\Tools\vsvars32.bat" call "C:\Program Files (x86)\Microsoft Visual Studio %TOOLCHAIN%\Common7\Tools\vsvars32.bat"
+    if exist "%VSINSTALL%\Common7\Tools\vsvars32.bat" (
+        call "%VSINSTALL%\Common7\Tools\vsvars32.bat"
+    ) else (
+        set "INCLUDE=%VSINSTALL%\VC\include;%INCLUDE%"
+        set "PATH=%VSINSTALL%\VC\bin;%PATH%"
+    )
 )
 
 echo [INFO] Platform: %OS%
