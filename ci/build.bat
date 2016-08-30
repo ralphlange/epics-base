@@ -24,7 +24,6 @@ if "%TOOLCHAIN%"=="cygwin" (
         set "INCLUDE=C:\cygwin\include;%INCLUDE%"
         set "PATH=C:\cygwin\bin;%PATH%"
     )
-    set "
     echo [INFO] Cygwin Toolchain
     echo [INFO] Compiler Version
     gcc
