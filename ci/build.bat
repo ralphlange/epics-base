@@ -9,8 +9,8 @@ set "ST="
 if /i "%CONFIGURATION%"=="static" set ST=-static
 
 rem reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set OS=32BIT || set OS=64BIT
+set OS=64BIT
 if "%PLATFORM%"=="x86" set OS=32BIT
-    else set OS=64BIT
 if "%OS%"=="64BIT" (
     set EPICS_HOST_ARCH=windows-x64%ST%
     set "PATH=C:\Program Files (x86)\Microsoft Visual Studio %TOOLCHAIN%\VC\bin\amd64;%PATH%"
