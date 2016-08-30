@@ -14,7 +14,7 @@ environment:
     - TOOLCHAIN: 14.0
 
 platform:
-  - x86
+#  - x86
   - x64
 
 matrix:
