@@ -14,13 +14,13 @@ if "%OS%"=="64BIT" (
     set "PATH=C:\Program Files (x86)\Microsoft Visual Studio %TOOLCHAIN%\VC\bin\amd64;%PATH%"
 ) else (
     set EPICS_HOST_ARCH=win32-x86%ST%
-    set "PATH=C:\Program Files (x86)\Microsoft Visual Studio %TOOLCHAIN%\VC\bin;%PATH%"
+    if exist "C:\Program Files (x86)\Microsoft Visual Studio %TOOLCHAIN%\Common7\Tools\vsvars32.bat" call "C:\Program Files (x86)\Microsoft Visual Studio %TOOLCHAIN%\Common7\Tools\vsvars32.bat"
 )
 
+echo [INFO] Platform: %OS%
 echo [INFO] Microsoft Visual Studio Toolchain %TOOLCHAIN%
 echo [INFO] Compiler Version
 cl
-echo [INFO] Platform: %COMPILER%
 echo [INFO] EPICS_HOST_ARCH: %EPICS_HOST_ARCH%
 
 rem C:\MinGW\bin\mingw32-make %*
