@@ -24,6 +24,7 @@ if "%TOOLCHAIN%"=="cygwin" (
         set "INCLUDE=C:\cygwin\include;%INCLUDE%"
         set "PATH=C:\cygwin\bin;%PATH%"
     )
+    set "
     echo [INFO] Cygwin Toolchain
     echo [INFO] Compiler Version
     gcc
@@ -53,27 +54,34 @@ if "%OS%"=="64BIT" (
     set EPICS_HOST_ARCH=windows-x64%ST%
     if exist "%VSINSTALL%\VC\vcvarsall.bat" (
         call "%VSINSTALL%\VC\vcvarsall.bat" amd64
+        if %ERRORLEVEL% NEQ 0 goto MSMissing
         goto MSFound
     )    
     if exist "%VSINSTALL%\VC\bin\amd64\vcvars64.bat" (
         call "%VSINSTALL%\VC\bin\amd64\vcvars64.bat"
+        if %ERRORLEVEL% NEQ 0 goto MSMissing
         goto MSFound
     )
 ) else (
     set EPICS_HOST_ARCH=win32-x86%ST%
     if exist "%VSINSTALL%\VC\vcvarsall.bat" (
         call "%VSINSTALL%\VC\vcvarsall.bat" x86
+        if %ERRORLEVEL% NEQ 0 goto MSMissing
         goto MSFound
     )    
     if exist "%VSINSTALL%\VC\bin\vcvars32.bat" (
         call "%VSINSTALL%\VC\bin\vcvars32.bat"
+        if %ERRORLEVEL% NEQ 0 goto MSMissing
         goto MSFound
     )
     if exist "%VSINSTALL%\Common7\Tools\vsvars32.bat" (
         call "%VSINSTALL%\Common7\Tools\vsvars32.bat"
+        if %ERRORLEVEL% NEQ 0 goto MSMissing
         goto MSFound
     )
 )
+
+:MSMissing
 echo [INFO] Installation for MSVC Toolchain %TOOLCHAIN% / %OS% seems to be missing
 exit 1
 
