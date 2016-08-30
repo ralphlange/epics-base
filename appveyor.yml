@@ -1,13 +1,14 @@
 version: 1.0.{build}
 image: Visual Studio 2015
 
-environment:
-  global:
-    TOOLCHAIN_VERSION: 14.0
+configuration:
+  - dynamic
+  - static
 
+environment:
   matrix:
-  - STATIC: YES
-  - STATIC: NO
+  - TOOLCHAIN_VERSION: 14.0
+  - TOOLCHAIN_VERSION: 13.0
 
 platform:
 - x86

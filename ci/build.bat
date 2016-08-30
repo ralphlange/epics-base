@@ -1,14 +1,14 @@
 :: Universal build script for AppVeyor (https://ci.appveyor.com/)
 :: Environment:
-::     TOOLCHAIN_VERSION   -  Visual Studio Version
-::     STATIC     YES/NO   -  determines EPICS build
+::     TOOLCHAIN_VERSION  -  Visual Studio Version  [12.0/13.0]
+::     CONFIGURATION      -  determines EPICS build   [dynamic/static]
 ::
 :: All command line args are passed to make
 
 set VCVARSALL="C:\Program Files (x86)\Microsoft Visual Studio %TOOLCHAIN_VERSION%\VC\vcvarsall.bat"
 
 set "ST="
-if /i "%STATIC%"=="YES" set ST=-static
+if /i "%CONFIGURATION%"=="static" set ST=-static
 
 reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set OS=32BIT || set OS=64BIT
 if "%OS%"=="64BIT" (
