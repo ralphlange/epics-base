@@ -53,10 +53,10 @@ if "%OS%"=="64BIT" (
     set EPICS_HOST_ARCH=windows-x64%ST%
     if exist "%VSINSTALL%\VC\vcvarsall.bat" (
         call "%VSINSTALL%\VC\vcvarsall.bat" amd64
-        cl
+        where cl
         if %ERRORLEVEL% NEQ 0 (
             call "%VSINSTALL%\VC\vcvarsall.bat" x86_amd64
-            cl
+            where cl
             if %ERRORLEVEL% NEQ 0 goto MSMissing
         )
         goto MSFound
