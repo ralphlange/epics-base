@@ -5,6 +5,8 @@
 ::
 :: All command line args are passed to make
 
+Setlocal EnableDelayedExpansion
+
 set "ST="
 if /i "%CONFIGURATION%"=="static" set ST=-static
 
@@ -14,7 +16,10 @@ if "%PLATFORM%"=="x86" set OS=32BIT
 echo [INFO] Platform: %OS%
 
 if "%TOOLCHAIN%"=="cygwin" (
-    if "%CONFIGURATION%"=="static" exit 1
+    if "%CONFIGURATION%"=="static" (
+        echo. "SHARED_LIBRARIES=NO" >> configure\CONFIG_SITE
+        echo. "STATIC_BUILD=YES" >> configure\CONFIG_SITE
+    )
     if "%OS%"=="64BIT" (
         set EPICS_HOST_ARCH=cygwin-x86_64
         set "INCLUDE=C:\cygwin64\include;%INCLUDE%"
@@ -31,15 +36,18 @@ if "%TOOLCHAIN%"=="cygwin" (
 )
 
 if "%TOOLCHAIN%"=="mingw" (
-    if "%CONFIGURATION%"=="static" exit 1
+    if "%CONFIGURATION%"=="static" (
+        echo. "SHARED_LIBRARIES=NO" >> configure\CONFIG_SITE
+        echo. "STATIC_BUILD=YES" >> configure\CONFIG_SITE
+    )
     if "%OS%"=="64BIT" (
         set EPICS_HOST_ARCH=windows-x64-mingw
-        set "INCLUDE=C:\mingw-w64\i686-5.3.0-posix-dwarf-rt_v4-rev0\mingw32\include;%INCLUDE%"
-        set "PATH=C:\mingw-w64\i686-5.3.0-posix-dwarf-rt_v4-rev0\mingw32\bin;%PATH%"
+        set "INCLUDE=C:\tools\mingw32\include;%INCLUDE%"
+        set "PATH=C:\tools\mingw64\bin;%PATH%"
     ) else (
         set EPICS_HOST_ARCH=win32-x86-mingw
-        set "INCLUDE=C:\MinGW\include;%INCLUDE%"
-        set "PATH=C:\MinGW\bin;%PATH%"
+        set "INCLUDE=C:\tools\mingw32\include;%INCLUDE%"
+        set "PATH=C:\tools\mingw64\bin;%PATH%"
     )
     echo [INFO] MinGW Toolchain
     echo [INFO] Compiler Version
@@ -54,33 +62,37 @@ if "%OS%"=="64BIT" (
     if exist "%VSINSTALL%\VC\vcvarsall.bat" (
         call "%VSINSTALL%\VC\vcvarsall.bat" amd64
         where cl
-        if %ERRORLEVEL% NEQ 0 (
+        if !ERRORLEVEL! NEQ 0 (
             call "%VSINSTALL%\VC\vcvarsall.bat" x86_amd64
             where cl
-            if %ERRORLEVEL% NEQ 0 goto MSMissing
+            if !ERRORLEVEL! NEQ 0 goto MSMissing
         )
         goto MSFound
     )
     if exist "%VSINSTALL%\VC\bin\amd64\vcvars64.bat" (
         call "%VSINSTALL%\VC\bin\amd64\vcvars64.bat"
-        if %ERRORLEVEL% NEQ 0 goto MSMissing
+        where cl
+        if !ERRORLEVEL! NEQ 0 goto MSMissing
         goto MSFound
     )
 ) else (
     set EPICS_HOST_ARCH=win32-x86%ST%
     if exist "%VSINSTALL%\VC\vcvarsall.bat" (
         call "%VSINSTALL%\VC\vcvarsall.bat" x86
-        if %ERRORLEVEL% NEQ 0 goto MSMissing
+        where cl
+        if !ERRORLEVEL! NEQ 0 goto MSMissing
         goto MSFound
     )    
     if exist "%VSINSTALL%\VC\bin\vcvars32.bat" (
         call "%VSINSTALL%\VC\bin\vcvars32.bat"
-        if %ERRORLEVEL% NEQ 0 goto MSMissing
+        where cl
+        if !ERRORLEVEL! NEQ 0 goto MSMissing
         goto MSFound
     )
     if exist "%VSINSTALL%\Common7\Tools\vsvars32.bat" (
         call "%VSINSTALL%\Common7\Tools\vsvars32.bat"
-        if %ERRORLEVEL% NEQ 0 goto MSMissing
+        where cl
+        if !ERRORLEVEL! NEQ 0 goto MSMissing
         goto MSFound
     )
 )
