@@ -41,12 +41,12 @@ if "%TOOLCHAIN%"=="mingw" (
         echo. "STATIC_BUILD=YES" >> configure\CONFIG_SITE
     )
     if "%OS%"=="64BIT" (
-        cinst mingw
+        cinst mingw || cinst mingw
         set EPICS_HOST_ARCH=windows-x64-mingw
         set "INCLUDE=C:\tools\mingw64\include;%INCLUDE%"
         set "PATH=C:\tools\mingw64\bin;%PATH%"
     ) else (
-        cinst mingw --x86
+        cinst mingw --x86 || cinst mingw --x86
         set EPICS_HOST_ARCH=win32-x86-mingw
         set "INCLUDE=C:\tools\mingw32\include;%INCLUDE%"
         set "PATH=C:\tools\mingw32\bin;%PATH%"
