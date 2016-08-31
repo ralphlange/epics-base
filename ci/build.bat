@@ -42,12 +42,12 @@ if "%TOOLCHAIN%"=="mingw" (
     )
     if "%OS%"=="64BIT" (
         set EPICS_HOST_ARCH=windows-x64-mingw
-        set "INCLUDE=C:\tools\mingw32\include;%INCLUDE%"
+        set "INCLUDE=C:\tools\mingw64\include;%INCLUDE%"
         set "PATH=C:\tools\mingw64\bin;%PATH%"
     ) else (
         set EPICS_HOST_ARCH=win32-x86-mingw
         set "INCLUDE=C:\tools\mingw32\include;%INCLUDE%"
-        set "PATH=C:\tools\mingw64\bin;%PATH%"
+        set "PATH=C:\tools\mingw32\bin;%PATH%"
     )
     echo [INFO] MinGW Toolchain
     echo [INFO] Compiler Version
