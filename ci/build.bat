@@ -19,6 +19,7 @@ if "%TOOLCHAIN%"=="cygwin" (
     if "%CONFIGURATION%"=="static" (
         echo. "SHARED_LIBRARIES=NO" >> configure\CONFIG_SITE
         echo. "STATIC_BUILD=YES" >> configure\CONFIG_SITE
+        type configure\CONFIG_SITE
     )
     if "%OS%"=="64BIT" (
         set EPICS_HOST_ARCH=cygwin-x86_64
@@ -39,6 +40,7 @@ if "%TOOLCHAIN%"=="mingw" (
     if "%CONFIGURATION%"=="static" (
         echo. "SHARED_LIBRARIES=NO" >> configure\CONFIG_SITE
         echo. "STATIC_BUILD=YES" >> configure\CONFIG_SITE
+        type configure\CONFIG_SITE
     )
     if "%OS%"=="64BIT" (
         cinst mingw || cinst mingw
