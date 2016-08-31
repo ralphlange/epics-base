@@ -26,7 +26,7 @@ if "%TOOLCHAIN%"=="cygwin" (
     )
     echo [INFO] Cygwin Toolchain
     echo [INFO] Compiler Version
-    gcc
+    gcc -v
     goto Finish
 )
 
@@ -43,7 +43,7 @@ if "%TOOLCHAIN%"=="mingw" (
     )
     echo [INFO] MinGW Toolchain
     echo [INFO] Compiler Version
-    gcc
+    gcc -v
     goto Finish
 )
 
@@ -53,9 +53,14 @@ if "%OS%"=="64BIT" (
     set EPICS_HOST_ARCH=windows-x64%ST%
     if exist "%VSINSTALL%\VC\vcvarsall.bat" (
         call "%VSINSTALL%\VC\vcvarsall.bat" amd64
-        if %ERRORLEVEL% NEQ 0 goto MSMissing
+        cl
+        if %ERRORLEVEL% NEQ 0 (
+            call "%VSINSTALL%\VC\vcvarsall.bat" x86_amd64
+            cl
+            if %ERRORLEVEL% NEQ 0 goto MSMissing
+        )
         goto MSFound
-    )    
+    )
     if exist "%VSINSTALL%\VC\bin\amd64\vcvars64.bat" (
         call "%VSINSTALL%\VC\bin\amd64\vcvars64.bat"
         if %ERRORLEVEL% NEQ 0 goto MSMissing
