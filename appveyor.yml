@@ -25,10 +25,6 @@ matrix:
     - platform: x64
       TOOLCHAIN: 11.0
 
-install:
-#    - ps: choco install mingw
-    - ps: choco install mingw --x86
-
 build_script:
   - cmd: ci/build.bat
 
