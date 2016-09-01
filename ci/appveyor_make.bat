@@ -13,6 +13,8 @@ if /i "%CONFIGURATION%"=="static" set ST=-static
 set OS=64BIT
 if "%PLATFORM%"=="x86" set OS=32BIT
 
+echo [INFO] Platform: %OS%
+
 if "%TOOLCHAIN%"=="cygwin" (
     if "%OS%"=="64BIT" (
         set EPICS_HOST_ARCH=cygwin-x86_64
