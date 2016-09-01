@@ -22,7 +22,6 @@ if "%TOOLCHAIN%"=="cygwin" (
 )
 
 if "%TOOLCHAIN%"=="mingw" (
-    echo TOOLCHAIN = MinGW
     if "%CONFIGURATION%"=="static" (
         echo CONFIG = static
         echo. >> configure\CONFIG_SITE
@@ -31,11 +30,11 @@ if "%TOOLCHAIN%"=="mingw" (
         echo [INFO] EPICS set up for static build
     )
     if "%OS%"=="64BIT" (
-        echo [INFO] Installing MinGW (64bit)
+        echo [INFO] Installing MinGW 64bit
         timeout /t 1
         cinst mingw || cinst mingw
     ) else (
-        echo [INFO] Installing MinGW (32bit)
+        echo [INFO] Installing MinGW 32bit
         timeout /t 1
         cinst mingw --x86 || cinst mingw --x86
     )
