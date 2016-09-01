@@ -18,12 +18,13 @@ if "%TOOLCHAIN%"=="cygwin" (
         echo "SHARED_LIBRARIES=NO" >> configure\CONFIG_SITE
         echo "STATIC_BUILD=YES" >> configure\CONFIG_SITE
         echo [INFO] EPICS set up for static build
-        echo [INFO] Installing cyg-get utility
-        cinst cyg-get
-        @powershell cyg-get libreadline-devel,ncursesw-devel
     ) else (
         echo [INFO] EPICS set up for dynamic build
     )
+    echo [INFO] Installing cyg-get utility
+    cinst cyg-get
+    echo [INFO] Installing dependencies
+    @powershell cyg-get libreadline-devel,ncursesw-devel
 )
 
 if "%TOOLCHAIN%"=="mingw" (
