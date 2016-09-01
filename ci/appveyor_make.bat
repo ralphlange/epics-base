@@ -104,4 +104,4 @@ cl
 :Finish
 echo [INFO] EPICS_HOST_ARCH: %EPICS_HOST_ARCH%
 
-echo %MAKE% %*
+%MAKE% %*
