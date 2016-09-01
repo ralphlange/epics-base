@@ -31,15 +31,17 @@ if "%TOOLCHAIN%"=="cygwin" (
 
 if "%TOOLCHAIN%"=="mingw" (
     if "%OS%"=="64BIT" (
-        set EPICS_HOST_ARCH=windows-x64-mingw
+        set "EPICS_HOST_ARCH=windows-x64-mingw"
         set "INCLUDE=C:\tools\mingw64\include;%INCLUDE%"
         set "PATH=C:\tools\mingw64\bin;%PATH%"
         set "MAKE=mingw64-make"
+        dir C:\tools\mingw64\bin
     ) else (
-        set EPICS_HOST_ARCH=win32-x86-mingw
+        set "EPICS_HOST_ARCH=win32-x86-mingw"
         set "INCLUDE=C:\tools\mingw32\include;%INCLUDE%"
         set "PATH=C:\tools\mingw32\bin;%PATH%"
         set "MAKE=mingw32-make"
+        dir C:\tools\mingw32\bin
     )
     echo [INFO] MinGW Toolchain
     echo [INFO] Compiler Version

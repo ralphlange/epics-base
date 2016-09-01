@@ -5,6 +5,8 @@
 ::
 :: All command line args are passed to make
 
+Setlocal EnableDelayedExpansion
+
 set OS=64BIT
 if "%PLATFORM%"=="x86" set OS=32BIT
 
