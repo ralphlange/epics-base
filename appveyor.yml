@@ -6,13 +6,13 @@ configuration:
 
 environment:
   matrix:
-#    - TOOLCHAIN: 9.0
-#    - TOOLCHAIN: 10.0
-#    - TOOLCHAIN: 11.0
-#    - TOOLCHAIN: 12.0
-#    - TOOLCHAIN: 14.0
-#   - TOOLCHAIN: cygwin
-    - TOOLCHAIN: mingw
+#  - TOOLCHAIN: 9.0
+#  - TOOLCHAIN: 10.0
+#  - TOOLCHAIN: 11.0
+#  - TOOLCHAIN: 12.0
+#  - TOOLCHAIN: 14.0
+#  - TOOLCHAIN: cygwin
+  - TOOLCHAIN: mingw
 
 platform:
   - x86
@@ -21,15 +21,15 @@ platform:
 matrix:
   allow_failures:
 # MSVC 11.0 is not installed for 64bit on Express installs
-    - platform: x64
-      TOOLCHAIN: 9.0
-    - platform: x64
-      TOOLCHAIN: 10.0
-    - platform: x64
-      TOOLCHAIN: 11.0
+  - platform: x64
+    TOOLCHAIN: 9.0
+  - platform: x64
+    TOOLCHAIN: 10.0
+  - platform: x64
+    TOOLCHAIN: 11.0
 
-#install:
-#  - cmd: ci/appveyor_install.bat
+install:
+  - cmd: ci/appveyor_install.bat
 
 build_script:
   - cmd: ci/appveyor_make.bat

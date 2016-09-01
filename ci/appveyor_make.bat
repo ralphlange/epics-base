@@ -34,6 +34,7 @@ if "%TOOLCHAIN%"=="cygwin" (
 if "%TOOLCHAIN%"=="mingw" (
     if "%OS%"=="64BIT" (
         echo [INFO] Installing MinGW (64bit)
+        echo.
         cinst mingw || cinst mingw
         set "EPICS_HOST_ARCH=windows-x64-mingw"
         set "INCLUDE=C:\tools\mingw64\include;%INCLUDE%"
@@ -42,6 +43,7 @@ if "%TOOLCHAIN%"=="mingw" (
         dir C:\tools\mingw64\bin
     ) else (
         echo [INFO] Installing MinGW (32bit)
+        echo.
         cinst mingw --x86 || cinst mingw --x86
         set "EPICS_HOST_ARCH=win32-x86-mingw"
         set "INCLUDE=C:\tools\mingw32\include;%INCLUDE%"

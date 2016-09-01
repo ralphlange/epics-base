@@ -30,9 +30,11 @@ if "%TOOLCHAIN%"=="mingw" (
     )
     if "%OS%"=="64BIT" (
         echo [INFO] Installing MinGW (64bit)
+        echo.
         cinst mingw || cinst mingw
     ) else (
         echo [INFO] Installing MinGW (32bit)
+        echo.
         cinst mingw --x86 || cinst mingw --x86
     )
 )
