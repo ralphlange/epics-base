@@ -21,6 +21,8 @@ if "%TOOLCHAIN%"=="cygwin" (
     ) else (
         echo [INFO] EPICS set up for dynamic build
     )
+    echo [INFO] Installing cyg-get utility
+    cinst cyg-get
 )
 
 if "%TOOLCHAIN%"=="mingw" (
