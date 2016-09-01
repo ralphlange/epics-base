@@ -32,26 +32,18 @@ if "%TOOLCHAIN%"=="cygwin" (
 )
 
 if "%TOOLCHAIN%"=="mingw" (
+    set "MAKE=mingw32-make"
     if "%OS%"=="64BIT" (
-        echo [INFO] Installing MinGW (64bit)
-        echo.
-        cinst mingw || cinst mingw
         set "EPICS_HOST_ARCH=windows-x64-mingw"
         set "INCLUDE=C:\tools\mingw64\include;%INCLUDE%"
         set "PATH=C:\tools\mingw64\bin;%PATH%"
-        set "MAKE=mingw64-make"
-        dir C:\tools\mingw64\bin
+        echo [INFO] MinGW Toolchain 64bit
     ) else (
-        echo [INFO] Installing MinGW (32bit)
-        echo.
-        cinst mingw --x86 || cinst mingw --x86
         set "EPICS_HOST_ARCH=win32-x86-mingw"
         set "INCLUDE=C:\tools\mingw32\include;%INCLUDE%"
         set "PATH=C:\tools\mingw32\bin;%PATH%"
-        set "MAKE=mingw32-make"
-        dir C:\tools\mingw32\bin
+        echo [INFO] MinGW Toolchain 32bit
     )
-    echo [INFO] MinGW Toolchain
     echo [INFO] Compiler Version
     gcc -v
     goto Finish
@@ -112,4 +104,4 @@ cl
 :Finish
 echo [INFO] EPICS_HOST_ARCH: %EPICS_HOST_ARCH%
 
-%MAKE% %*
+echo %MAKE% %*

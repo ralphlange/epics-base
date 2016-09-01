@@ -17,6 +17,7 @@ if "%TOOLCHAIN%"=="cygwin" (
         echo. >> configure\CONFIG_SITE
         echo "SHARED_LIBRARIES=NO" >> configure\CONFIG_SITE
         echo "STATIC_BUILD=YES" >> configure\CONFIG_SITE
+        echo [INFO] EPICS set up for static build
     )
 )
 
@@ -27,14 +28,15 @@ if "%TOOLCHAIN%"=="mingw" (
         echo. >> configure\CONFIG_SITE
         echo SHARED_LIBRARIES=NO >> configure\CONFIG_SITE
         echo STATIC_BUILD=YES >> configure\CONFIG_SITE
+        echo [INFO] EPICS set up for static build
     )
     if "%OS%"=="64BIT" (
         echo [INFO] Installing MinGW (64bit)
-        echo.
+        timeout /t 1
         cinst mingw || cinst mingw
     ) else (
         echo [INFO] Installing MinGW (32bit)
-        echo.
+        timeout /t 1
         cinst mingw --x86 || cinst mingw --x86
     )
 )
