@@ -28,8 +28,8 @@ matrix:
     - platform: x64
       TOOLCHAIN: 11.0
 
-install:
-  - cmd: ci/appveyor_install.bat
+#install:
+#  - cmd: ci/appveyor_install.bat
 
 build_script:
   - cmd: ci/appveyor_make.bat
