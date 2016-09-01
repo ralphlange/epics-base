@@ -1,8 +1,7 @@
 version: 1.0.{build}
-image: Visual Studio 2015
 
 configuration:
-  - dynamic
+#  - dynamic
   - static
 
 environment:
@@ -12,7 +11,7 @@ environment:
 #    - TOOLCHAIN: 11.0
 #    - TOOLCHAIN: 12.0
 #    - TOOLCHAIN: 14.0
-#    - TOOLCHAIN: cygwin
+#   - TOOLCHAIN: cygwin
     - TOOLCHAIN: mingw
 
 platform:
@@ -21,12 +20,19 @@ platform:
 
 matrix:
   allow_failures:
-# MSVC 11.0 is not installed for 64bit
+# MSVC 11.0 is not installed for 64bit on Express installs
+    - platform: x64
+      TOOLCHAIN: 9.0
+    - platform: x64
+      TOOLCHAIN: 10.0
     - platform: x64
       TOOLCHAIN: 11.0
 
+install:
+  - cmd: ci/appveyor_install.bat
+
 build_script:
-  - cmd: ci/build.bat
+  - cmd: ci/appveyor_make.bat
 
 test_script:
-  - cmd: ci/build.bat runtests
+  - cmd: ci/appveyor_make.bat runtests

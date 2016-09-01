@@ -13,15 +13,7 @@ if /i "%CONFIGURATION%"=="static" set ST=-static
 set OS=64BIT
 if "%PLATFORM%"=="x86" set OS=32BIT
 
-echo [INFO] Platform: %OS%
-
 if "%TOOLCHAIN%"=="cygwin" (
-    if "%CONFIGURATION%"=="static" (
-        echo. >> configure\CONFIG_SITE
-        echo "SHARED_LIBRARIES=NO" >> configure\CONFIG_SITE
-        echo "STATIC_BUILD=YES" >> configure\CONFIG_SITE
-        type configure\CONFIG_SITE
-    )
     if "%OS%"=="64BIT" (
         set EPICS_HOST_ARCH=cygwin-x86_64
         set "INCLUDE=C:\cygwin64\include;%INCLUDE%"
@@ -38,22 +30,16 @@ if "%TOOLCHAIN%"=="cygwin" (
 )
 
 if "%TOOLCHAIN%"=="mingw" (
-    if "%CONFIGURATION%"=="static" (
-        echo. >> configure\CONFIG_SITE
-        echo SHARED_LIBRARIES=NO >> configure\CONFIG_SITE
-        echo STATIC_BUILD=YES >> configure\CONFIG_SITE
-        type configure\CONFIG_SITE
-    )
     if "%OS%"=="64BIT" (
-        cinst mingw || cinst mingw
         set EPICS_HOST_ARCH=windows-x64-mingw
         set "INCLUDE=C:\tools\mingw64\include;%INCLUDE%"
         set "PATH=C:\tools\mingw64\bin;%PATH%"
+        set "MAKE=mingw64-make"
     ) else (
-        cinst mingw --x86 || cinst mingw --x86
         set EPICS_HOST_ARCH=win32-x86-mingw
         set "INCLUDE=C:\tools\mingw32\include;%INCLUDE%"
         set "PATH=C:\tools\mingw32\bin;%PATH%"
+        set "MAKE=mingw32-make"
     )
     echo [INFO] MinGW Toolchain
     echo [INFO] Compiler Version
@@ -62,6 +48,7 @@ if "%TOOLCHAIN%"=="mingw" (
 )
 
 set "VSINSTALL=C:\Program Files (x86)\Microsoft Visual Studio %TOOLCHAIN%"
+set "MAKE=C:\MinGW\bin\mingw32-make"
 
 if "%OS%"=="64BIT" (
     set EPICS_HOST_ARCH=windows-x64%ST%
@@ -115,4 +102,4 @@ cl
 :Finish
 echo [INFO] EPICS_HOST_ARCH: %EPICS_HOST_ARCH%
 
-C:\MinGW\bin\mingw32-make %*
+%MAKE% %*
