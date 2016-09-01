@@ -17,8 +17,9 @@ echo [INFO] Platform: %OS%
 
 if "%TOOLCHAIN%"=="cygwin" (
     if "%CONFIGURATION%"=="static" (
-        echo. "SHARED_LIBRARIES=NO" >> configure\CONFIG_SITE
-        echo. "STATIC_BUILD=YES" >> configure\CONFIG_SITE
+        echo. >> configure\CONFIG_SITE
+        echo "SHARED_LIBRARIES=NO" >> configure\CONFIG_SITE
+        echo "STATIC_BUILD=YES" >> configure\CONFIG_SITE
         type configure\CONFIG_SITE
     )
     if "%OS%"=="64BIT" (
@@ -38,8 +39,9 @@ if "%TOOLCHAIN%"=="cygwin" (
 
 if "%TOOLCHAIN%"=="mingw" (
     if "%CONFIGURATION%"=="static" (
-        echo. "SHARED_LIBRARIES=NO" >> configure\CONFIG_SITE
-        echo. "STATIC_BUILD=YES" >> configure\CONFIG_SITE
+        echo. >> configure\CONFIG_SITE
+        echo SHARED_LIBRARIES=NO >> configure\CONFIG_SITE
+        echo STATIC_BUILD=YES >> configure\CONFIG_SITE
         type configure\CONFIG_SITE
     )
     if "%OS%"=="64BIT" (
