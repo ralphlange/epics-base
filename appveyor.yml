@@ -11,8 +11,8 @@ environment:
 #  - TOOLCHAIN: 11.0
 #  - TOOLCHAIN: 12.0
 #  - TOOLCHAIN: 14.0
-#  - TOOLCHAIN: cygwin
-  - TOOLCHAIN: mingw
+  - TOOLCHAIN: cygwin
+#  - TOOLCHAIN: mingw
 
 platform:
   - x86
