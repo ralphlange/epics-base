@@ -15,7 +15,6 @@ if "%TOOLCHAIN%"=="cygwin" (
         echo. >> configure\CONFIG_SITE
         echo "SHARED_LIBRARIES=NO" >> configure\CONFIG_SITE
         echo "STATIC_BUILD=YES" >> configure\CONFIG_SITE
-        type configure\CONFIG_SITE
     )
 )
 
@@ -24,7 +23,6 @@ if "%TOOLCHAIN%"=="mingw" (
         echo. >> configure\CONFIG_SITE
         echo SHARED_LIBRARIES=NO >> configure\CONFIG_SITE
         echo STATIC_BUILD=YES >> configure\CONFIG_SITE
-        type configure\CONFIG_SITE
     )
     if "%OS%"=="64BIT" (
         echo [INFO] Installing MinGW (64bit)
