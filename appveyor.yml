@@ -1,7 +1,7 @@
 version: 1.0.{build}
 
 configuration:
-  - dynamic
+#  - dynamic
   - static
 
 environment:
