@@ -32,7 +32,7 @@ if "%TOOLCHAIN%"=="cygwin" (
         cinst libreadline-devel --x86 --source cygwin
         cinst ncursesw-devel --x86 --source cygwin
     )
-::    @powershell cyg-get libreadline-devel,ncursesw-devel
+    @powershell cyg-get libreadline-devel,ncursesw-devel
 )
 
 if "%TOOLCHAIN%"=="mingw" (
