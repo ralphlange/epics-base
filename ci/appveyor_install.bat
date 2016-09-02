@@ -22,17 +22,12 @@ if "%TOOLCHAIN%"=="cygwin" (
         echo [INFO] EPICS set up for dynamic build
     )
     if "%OS%"=="64BIT" (
-::        echo [INFO] Installing Cygwin 64bit
-::        cinst cyg-get --dir=C:\tools\cygwin64 || cinst cyg-get --dir=C:\tools\cygwin64
         cinst libreadline-devel --source cygwin
         cinst ncursesw-devel --source cygwin
     ) else (
-::        echo [INFO] Installing Cygwin 32bit
-::        cinst cyg-get --x86 --dir=C:\tools\cygwin32 || cinst cyg-get --x86 --dir=C:\tools\cygwin32
         cinst libreadline-devel --x86 --source cygwin
         cinst ncursesw-devel --x86 --source cygwin
     )
-    @powershell cyg-get libreadline-devel,ncursesw-devel
 )
 
 if "%TOOLCHAIN%"=="mingw" (
