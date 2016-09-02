@@ -23,10 +23,10 @@ if "%TOOLCHAIN%"=="cygwin" (
     )
     if "%OS%"=="64BIT" (
         echo [INFO] Installing dependencies
-        C:\cygwin64\setup-x86_64.exe -q -P libreadline-devel,ncursesw-devel
+        C:\cygwin64\setup-x86_64.exe -q -P "libreadline-devel,ncursesw-devel"
     ) else (
         echo [INFO] Installing dependencies
-        C:\cygwin\setup-x86.exe -q -P libreadline-devel,ncursesw-devel
+        C:\cygwin\setup-x86.exe -q -P "libreadline-devel,ncursesw-devel"
     )
 )
 
