@@ -22,11 +22,11 @@ if "%TOOLCHAIN%"=="cygwin" (
         echo [INFO] EPICS set up for dynamic build
     )
     if "%OS%"=="64BIT" (
-        cinst libreadline-devel --source cygwin
-        cinst ncursesw-devel --source cygwin
+        echo [INFO] Installing dependencies
+        C:\cygwin64\setup.exe -q -P libreadline-devel,ncursesw-devel
     ) else (
-        cinst libreadline-devel --x86 --source cygwin
-        cinst ncursesw-devel --x86 --source cygwin
+        echo [INFO] Installing dependencies
+        C:\cygwin\setup-x86.exe -q -P libreadline-devel,ncursesw-devel
     )
 )
 
