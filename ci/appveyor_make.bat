@@ -109,4 +109,4 @@ echo [INFO] EPICS_HOST_ARCH: %EPICS_HOST_ARCH%
 echo [INFO] Make version
 %MAKE% --version
 
-%MAKE% %*
+echo %MAKE% %*

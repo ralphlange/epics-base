@@ -21,9 +21,13 @@ if "%TOOLCHAIN%"=="cygwin" (
     ) else (
         echo [INFO] EPICS set up for dynamic build
     )
-    echo [INFO] Installing Cygwin and cyg-get utility
-    @powershell choco install cyg-get
-    echo [INFO] Installing dependencies
+    if "%OS%"=="64BIT" (
+        echo [INFO] Installing Cygwin 64bit
+        cinst cyg-get || cinst cyg-get
+    ) else (
+        echo [INFO] Installing Cygwin 32bit
+        cinst cyg-get --x86 || cinst cyg-get --x86
+    )
     @powershell cyg-get libreadline-devel,ncursesw-devel
 )
 
