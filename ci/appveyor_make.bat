@@ -19,13 +19,13 @@ if "%TOOLCHAIN%"=="cygwin" (
     set "MAKE=make"
     if "%OS%"=="64BIT" (
         set EPICS_HOST_ARCH=cygwin-x86_64
-        set "INCLUDE=C:\cygwin64\include;%INCLUDE%"
-        set "PATH=C:\cygwin64\bin;%PATH%"
+        set "INCLUDE=C:\tools\cygwin64\include;%INCLUDE%"
+        set "PATH=C:\tools\cygwin64\bin;%PATH%"
         echo [INFO] Cygwin Toolchain 64bit
     ) else (
         set EPICS_HOST_ARCH=cygwin-x86
-        set "INCLUDE=C:\cygwin\include;%INCLUDE%"
-        set "PATH=C:\cygwin\bin;%PATH%"
+        set "INCLUDE=C:\tools\cygwin32\include;%INCLUDE%"
+        set "PATH=C:\tools\cygwin32\bin;%PATH%"
         echo [INFO] Cygwin Toolchain 32bit
     )
     echo [INFO] Cygwin Toolchain

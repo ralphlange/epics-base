@@ -23,10 +23,10 @@ if "%TOOLCHAIN%"=="cygwin" (
     )
     if "%OS%"=="64BIT" (
         echo [INFO] Installing Cygwin 64bit
-        cinst cyg-get || cinst cyg-get
+        cinst cyg-get --dir=C:\tools\cygwin64 || cinst cyg-get --dir=C:\tools\cygwin64
     ) else (
         echo [INFO] Installing Cygwin 32bit
-        cinst cyg-get --x86 || cinst cyg-get --x86
+        cinst cyg-get --x86 --dir=C:\tools\cygwin32 || cinst cyg-get --x86 --dir=C:\tools\cygwin32
     )
     @powershell cyg-get libreadline-devel,ncursesw-devel
 )
