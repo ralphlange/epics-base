@@ -46,4 +46,6 @@ if "%TOOLCHAIN%"=="mingw" (
         echo [INFO] Installing MinGW 32bit
         cinst mingw --x86 || cinst mingw --x86
     )
+    "C:\Program Files\7-Zip\7z" e make-4.1.zip
+    dir
 )
