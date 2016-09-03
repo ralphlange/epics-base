@@ -31,7 +31,7 @@ matrix:
 install:
   - cmd: ci/appveyor_install.bat
   - ps: (new-object net.webclient).DownloadFile('https://www.aps.anl.gov/epics/download/tools/make-4.1-win64.zip', 'make-4.1.zip')
-  - cmd: "C:\\Program Files\\7-Zip\\7z" x make-4.1.zip
+  - cmd: C:\Program Files\7-Zip\7z e make-4.1.zip
 
 build_script:
   - cmd: ci/appveyor_make.bat
