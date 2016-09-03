@@ -16,7 +16,7 @@ Com_SRCS += logClient.c
 PROD_HOST += iocLogServer
 
 iocLogServer_SRCS = iocLogServer.c
-iocLogServer_LIBS = Com.lib
+iocLogServer_LIBS = Com
 
 iocLogServer_SYS_LIBS_solaris += socket
 iocLogServer_SYS_LIBS_WIN32   += user32 ws2_32
