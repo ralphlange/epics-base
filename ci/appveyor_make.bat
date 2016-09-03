@@ -35,7 +35,7 @@ if "%TOOLCHAIN%"=="cygwin" (
 )
 
 if "%TOOLCHAIN%"=="mingw" (
-    set "MAKE=C:\mingw-w64\i686-5.3.0-posix-dwarf-rt_v4-rev0\mingw32\bin\make"
+    set "MAKE=.\make.exe"
     if "%OS%"=="64BIT" (
         set "EPICS_HOST_ARCH=windows-x64-mingw"
         set "INCLUDE=C:\tools\mingw64\include;%INCLUDE%"
