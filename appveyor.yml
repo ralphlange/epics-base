@@ -29,7 +29,6 @@ matrix:
     TOOLCHAIN: 11.0
 
 install:
-  - ps: (new-object net.webclient).DownloadFile('https://www.aps.anl.gov/epics/download/tools/make-4.1-win64.zip', 'C:\tools\make-4.1.zip')
   - cmd: ci/appveyor_install.bat
 
 build_script:
