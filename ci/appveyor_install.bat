@@ -33,8 +33,8 @@ if "%TOOLCHAIN%"=="cygwin" (
 if "%TOOLCHAIN%"=="mingw" (
     if "%CONFIGURATION%"=="static" (
         echo. >> configure\CONFIG_SITE
-        echo SHARED_LIBRARIES=NO >> configure\CONFIG_SITE
-        echo STATIC_BUILD=YES >> configure\CONFIG_SITE
+        echo SHARED_LIBRARIES=NO>> configure\CONFIG_SITE
+        echo STATIC_BUILD=YES>> configure\CONFIG_SITE
         echo [INFO] EPICS set up for static build
     ) else (
         echo [INFO] EPICS set up for dynamic build
