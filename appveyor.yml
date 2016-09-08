@@ -1,17 +1,17 @@
 version: 1.0.{build}
 
 configuration:
-#  - dynamic
+  - dynamic
   - static
 
 environment:
   matrix:
-#  - TOOLCHAIN: 9.0
-#  - TOOLCHAIN: 10.0
-#  - TOOLCHAIN: 11.0
-#  - TOOLCHAIN: 12.0
-#  - TOOLCHAIN: 14.0
-#  - TOOLCHAIN: cygwin
+  - TOOLCHAIN: 9.0
+  - TOOLCHAIN: 10.0
+  - TOOLCHAIN: 11.0
+  - TOOLCHAIN: 12.0
+  - TOOLCHAIN: 14.0
+  - TOOLCHAIN: cygwin
   - TOOLCHAIN: mingw
 
 platform:
