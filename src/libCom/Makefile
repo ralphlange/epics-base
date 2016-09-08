@@ -60,3 +60,8 @@ include $(LIBCOM)/log/RULES
 include $(LIBCOM)/misc/RULES
 include $(LIBCOM)/osi/RULES
 
+build:
+	@echo BUILDLIB_PREFIX "$(BUILDLIB_PREFIX)"
+	@echo BUILDLIB_SUFFIX "$(BUILDLIB_SUFFIX)"
+	@echo iocLogServer_OBJSNAME "$(iocLogServer_OBJSNAME)"
+	@echo iocLogServer_DEPLIBS "$(iocLogServer_DEPLIBS)"
