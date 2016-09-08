@@ -61,6 +61,8 @@ include $(LIBCOM)/misc/RULES
 include $(LIBCOM)/osi/RULES
 
 inc:
+	@echo LIB_PREFIX "$(LIB_PREFIX)"
+	@echo LIB_SUFFIX "$(LIB_SUFFIX)"
 	@echo BUILDLIB_PREFIX "$(BUILDLIB_PREFIX)"
 	@echo BUILDLIB_SUFFIX "$(BUILDLIB_SUFFIX)"
 	@echo iocLogServer_OBJSNAME "$(iocLogServer_OBJSNAME)"
