@@ -3,6 +3,8 @@ version: 1.0.{build}
 configuration:
   - dynamic
   - static
+  - dynamic-debug
+  - static-debug
 
 environment:
   matrix:
