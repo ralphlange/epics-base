@@ -1,11 +1,30 @@
+# AppVeyor configuration for EPICS Base
+
+# Ralph Lange <ralph.lange@gmx.de>
+# Copyright (c) 2016 ITER Organization
+
+# Version format
 version: 1.0.{build}
 
+# Fetch repository as zip archive
+shallow_clone: true
+
+# Skipping commits affecting only specific files
+skip_commits:
+  files:
+    - 'documentation/*'
+    - 'templates/*'
+    - '**/*.html'
+    - '**/*.md'
+
+# Build Configuration as axis for matrix build
 configuration:
   - dynamic
   - static
   - dynamic-debug
   - static-debug
 
+# Environment variables as axis for matrix build
 environment:
   matrix:
   - TOOLCHAIN: 9.0
@@ -16,19 +35,19 @@ environment:
   - TOOLCHAIN: cygwin
   - TOOLCHAIN: mingw
 
+# Platform as axis for matrix build
 platform:
   - x86
   - x64
 
+# Matrix configuration: allow specific failing jobs
 matrix:
   allow_failures:
-# MSVC 11.0 is not installed for 64bit on Express installs
+  # VS Express installs don't have the 64 bit compiler
   - platform: x64
     TOOLCHAIN: 9.0
   - platform: x64
     TOOLCHAIN: 10.0
-  - platform: x64
-    TOOLCHAIN: 11.0
 
 install:
   - cmd: ci/appveyor_install.bat
