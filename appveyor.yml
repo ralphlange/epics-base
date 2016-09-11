@@ -8,9 +8,10 @@ version: 1.0.{build}
 
 # Called at very beginning, before repo cloning
 init:
+  # Set autocrlf to make batch files work
   - git config --global core.autocrlf true
 
-# Set clone depth (do not fetch complete history
+# Set clone depth (do not fetch complete history)
 clone_depth: 2
 
 # Skipping commits affecting only specific files
@@ -31,13 +32,13 @@ configuration:
 # Environment variables as axis for matrix build
 environment:
   matrix:
-#  - TOOLCHAIN: 9.0
-#  - TOOLCHAIN: 10.0
-#  - TOOLCHAIN: 11.0
-#  - TOOLCHAIN: 12.0
-#  - TOOLCHAIN: 14.0
+  - TOOLCHAIN: 9.0
+  - TOOLCHAIN: 10.0
+  - TOOLCHAIN: 11.0
+  - TOOLCHAIN: 12.0
+  - TOOLCHAIN: 14.0
   - TOOLCHAIN: cygwin
-#  - TOOLCHAIN: mingw
+  - TOOLCHAIN: mingw
 
 # Platform as axis for matrix build
 platform:
