@@ -57,3 +57,8 @@ if "%TOOLCHAIN%"=="mingw" (
         cinst mingw --x86 || cinst mingw --x86
     )
 )
+
+echo [INFO] Installing Make 4.1
+@powershell -Command "(new-object net.webclient).DownloadFile('https://www.aps.anl.gov/epics/download/tools/make-4.1-win64.zip', 'C:\tools\make-4.1.zip')"
+cd \tools
+"C:\Program Files\7-Zip\7z" e make-4.1.zip
