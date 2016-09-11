@@ -52,7 +52,7 @@ if "%TOOLCHAIN%"=="mingw" (
 )
 
 set "VSINSTALL=C:\Program Files (x86)\Microsoft Visual Studio %TOOLCHAIN%"
-set "MAKE=C:\tools\make.exe"
+set "MAKE=C:\tools\make"
 
 if "%OS%"=="64BIT" (
     set EPICS_HOST_ARCH=windows-x64%ST%
