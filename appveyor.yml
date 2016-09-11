@@ -6,8 +6,8 @@
 # Version format
 version: 1.0.{build}
 
-# Fetch repository as zip archive
-shallow_clone: true
+# Set clone depth (do not fetch complete history
+clone_depth: 2
 
 # Skipping commits affecting only specific files
 skip_commits:
