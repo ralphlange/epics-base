@@ -28,7 +28,6 @@ if "%TOOLCHAIN%"=="cygwin" (
         set "PATH=C:\cygwin\bin;%PATH%"
         echo [INFO] Cygwin Toolchain 32bit
     )
-    echo [INFO] Cygwin Toolchain
     echo [INFO] Compiler Version
     gcc -v
     goto Finish

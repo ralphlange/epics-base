@@ -27,10 +27,12 @@ if "%TOOLCHAIN%"=="cygwin" (
         echo [INFO] EPICS set up for optimized build
     )
     if "%OS%"=="64BIT" (
-        echo [INFO] Installing dependencies
+        echo [INFO] Installing Cygwin 64bit and dependencies
+        @powershell -Command "(new-object net.webclient).DownloadFile('http://www.cygwin.com/setup-x86_64.exe', 'C:\cygwin64\setup-x86_64.exe')"
         C:\cygwin64\setup-x86_64.exe -q -P "libreadline-devel,libncursesw-devel"
     ) else (
-        echo [INFO] Installing dependencies
+        echo [INFO] Installing Cygwin 32bit and dependencies
+        @powershell -Command "(new-object net.webclient).DownloadFile('http://www.cygwin.com/setup-x86.exe', 'C:\cygwin\setup-x86.exe')"
         C:\cygwin\setup-x86.exe -q -P "libreadline-devel,libncursesw-devel"
     )
 )
