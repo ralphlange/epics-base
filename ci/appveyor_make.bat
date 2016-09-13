@@ -17,6 +17,7 @@ echo [INFO] Platform: %OS%
 
 :: Use parallel make, except for 3.14
 set "MAKEARGS=-j4 -Otarget"
+echo [INFO] Appveyor branch '%APPVEYOR_REPO_BRANCH%'
 if "%APPVEYOR_REPO_BRANCH%"=="3.14" set MAKEARGS=
 
 if "%TOOLCHAIN%"=="cygwin" (
