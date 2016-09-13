@@ -16,9 +16,10 @@ if "%PLATFORM%"=="x86" set OS=32BIT
 echo [INFO] Platform: %OS%
 
 :: Use parallel make, except for 3.14
-set "MAKEARGS=-j4 -Otarget"
-echo [INFO] Appveyor branch '%APPVEYOR_REPO_BRANCH%'
-if "%APPVEYOR_REPO_BRANCH%"=="3.14" set MAKEARGS=
+set "MAKEXARGS=-j4 -Otarget"
+if "%APPVEYOR_REPO_BRANCH%"=="3.14" set MAKEXARGS=
+
+echo [info] make args '%MAKEXARGS%'
 
 if "%TOOLCHAIN%"=="cygwin" (
     set "MAKE=make"
@@ -113,4 +114,4 @@ echo [INFO] EPICS_HOST_ARCH: %EPICS_HOST_ARCH%
 echo [INFO] Make version
 %MAKE% --version
 
-%MAKE% %MAKEARGS% %*
+%MAKE% %MAKEXARGS% %*
