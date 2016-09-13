@@ -6,6 +6,15 @@
 # Version format
 version: 1.0.{build}
 
+# Branch related configuration
+-
+  # No parallel build in 3.14
+  branches:
+    except:
+      - 3.14
+  environment:
+    makeargs: -j4 -Otarget
+
 # Called at very beginning, before repo cloning
 init:
   # Set autocrlf to make batch files work
