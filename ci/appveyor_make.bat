@@ -1,7 +1,8 @@
 :: Universal build script for AppVeyor (https://ci.appveyor.com/)
 :: Environment:
-::     TOOLCHAIN      -  Toolchain Version  [9.0/10.0/11.0/12.0/14.0/cygwin/mingw]
+::     TOOLCHAIN      -  toolchain version   [9.0/10.0/11.0/12.0/14.0/cygwin/mingw]
 ::     CONFIGURATION  -  determines EPICS build   [dynamic/static]
+::     PLATFORM       -  architecture   [x86/x64]
 ::
 :: All command line args are passed to make
 
@@ -16,10 +17,8 @@ if "%PLATFORM%"=="x86" set OS=32BIT
 echo [INFO] Platform: %OS%
 
 :: Use parallel make, except for 3.14
-set "MAKEXARGS=-j4 -Otarget"
-if "%APPVEYOR_REPO_BRANCH%"=="3.14" set MAKEXARGS=
-
-echo [info] make args '%MAKEXARGS%'
+set "MAKEARGS=-j4 -Otarget"
+if "%APPVEYOR_REPO_BRANCH%"=="3.14" set MAKEARGS=
 
 if "%TOOLCHAIN%"=="cygwin" (
     set "MAKE=make"
@@ -114,4 +113,4 @@ echo [INFO] EPICS_HOST_ARCH: %EPICS_HOST_ARCH%
 echo [INFO] Make version
 %MAKE% --version
 
-%MAKE% %MAKEXARGS% %*
+%MAKE% %MAKEARGS% %*
