@@ -6,6 +6,10 @@
 # Version format
 version: 1.0.{build}
 
+#---------------------------------#
+#       repository cloning        #
+#---------------------------------#
+
 # Called at very beginning, before repo cloning
 init:
   # Set autocrlf to make batch files work
@@ -22,14 +26,18 @@ skip_commits:
     - '**/*.html'
     - '**/*.md'
 
-# Build Configuration as axis for matrix build
+#---------------------------------#
+#   build matrix configuration    #
+#---------------------------------#
+
+# Build Configurations: dll/static, regular/debug
 configuration:
   - dynamic
   - static
   - dynamic-debug
   - static-debug
 
-# Environment variables as axis for matrix build
+# Environment variables: compiler toolchain
 environment:
   matrix:
   - TOOLCHAIN: 9.0
@@ -40,7 +48,7 @@ environment:
   - TOOLCHAIN: cygwin
   - TOOLCHAIN: mingw
 
-# Platform as axis for matrix build
+# Platform: architecture
 platform:
   - x86
   - x64
@@ -53,6 +61,10 @@ matrix:
     TOOLCHAIN: 9.0
   - platform: x64
     TOOLCHAIN: 10.0
+
+#---------------------------------#
+#     building & testing          #
+#---------------------------------#
 
 install:
   - cmd: ci/appveyor_install.bat
@@ -67,6 +79,8 @@ test_script:
 #         notifications           #
 #---------------------------------#
 
-- provider: Slack
-  incoming_webhook:
-    secure: RYOm3FIUYeZGjWKaeTVKwq+C3fzK54AKwbmAoECED45mex3lN+8HmrC845a6mg9xPUJ/ND51RopWVaKDD9/UzaM0SO195RQLKqUTIUafiuM=
+notifications:
+
+  - provider: Slack
+    incoming_webhook:
+      secure: RYOm3FIUYeZGjWKaeTVKwq+C3fzK54AKwbmAoECED45mex3lN+8HmrC845a6mg9xPUJ/ND51RopWVaKDD9/UzaM0SO195RQLKqUTIUafiuM=
