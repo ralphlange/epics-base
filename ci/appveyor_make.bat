@@ -17,7 +17,7 @@ if "%PLATFORM%"=="x86" set OS=32BIT
 echo [INFO] Platform: %OS%
 
 :: Use parallel make, except for 3.14
-set "MAKEARGS=-j4 -Otarget"
+set "MAKEARGS=-j2 -Otarget"
 if "%APPVEYOR_REPO_BRANCH%"=="3.14" set MAKEARGS=
 
 if "%TOOLCHAIN%"=="cygwin" (
