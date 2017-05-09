@@ -1,9 +1,13 @@
-:: Universal build script for AppVeyor (https://ci.appveyor.com/)
+:: Build script for AppVeyor (https://ci.appveyor.com/)
 :: Environment:
 ::     TOOLCHAIN      -  Toolchain Version  [9.0/10.0/11.0/12.0/14.0/cygwin/mingw]
-::     CONFIGURATION  -  determines EPICS build   [dynamic/static, -debug]
+::     CONFIGURATION  -  determines EPICS build  [dynamic/static, -debug]
+::     PLATFORM       -  "x86" -> use 32bit architecture
 ::
-:: All command line args are passed to make
+:: Prepares an Appveyor build by excuting the following steps
+::     - Set up configure\CONFIG_SITE for static vs. dynamic build
+::     - Install Cygwin / Mingw  (TOOLCHAIN setting) in the in the appropriate flavor
+::     - Download and install Make-4.1 from EPICS download page
 
 Setlocal EnableDelayedExpansion
 
