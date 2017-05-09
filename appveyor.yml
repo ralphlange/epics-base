@@ -4,7 +4,7 @@
 # Copyright (c) 2016-2017 ITER Organization
 
 # Version format
-version: 1.0.{build}
+version: {branch}.{build}
 
 #---------------------------------#
 #       repository cloning        #
