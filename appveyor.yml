@@ -55,7 +55,7 @@ platform:
 
 # Matrix configuration: allow specific failing jobs
 matrix:
-  allow_failures:
+  exclude:
   # VS Express installs don't have the 64 bit compiler
   - platform: x64
     TOOLCHAIN: 9.0
