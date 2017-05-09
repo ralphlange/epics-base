@@ -6,6 +6,13 @@
 # Version format
 version: {branch}.{build}
 
+# branches to build
+branches:
+  only:
+    - 3.16
+    - 3.15
+    - 3.14
+
 #---------------------------------#
 #       repository cloning        #
 #---------------------------------#
