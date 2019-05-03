@@ -47,11 +47,12 @@ environment:
 #  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
 #    TOOLCHAIN: 2017
 #  - TOOLCHAIN: cygwin
-  - TOOLCHAIN: mingw
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+    TOOLCHAIN: mingw
 
 # Platform: architecture
 platform:
-#  - x86
+  - x86
   - x64
 
 # Matrix configuration: allow specific failing jobs
