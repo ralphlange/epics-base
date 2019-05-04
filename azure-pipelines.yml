@@ -19,7 +19,7 @@ steps:
     dir C:\Windows
     dir C:\
     dir C:\"Program Files (x86)"
-    dir C:\"Program Files (x86)"\"Microsoft Visual Studio 2017"\VC
+    dir C:\"Program Files (x86)"\"Microsoft Visual Studio 14.0"\VC
   displayName: 'Run a multi-line script'
   
 - bash: |
