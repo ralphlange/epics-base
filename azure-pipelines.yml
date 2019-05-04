@@ -3,8 +3,8 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-#trigger:
-#- master
+trigger:
+- master
 
 pool:
   vmImage: 'vs2017-win2016'
@@ -17,11 +17,11 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     dir
     dir C:\Windows
-    dir "C:\Program Files (x86)\Microsoft Visual Studio 2017"
-    dir "C:\Program Files (x86)\Microsoft Visual Studio 2017\VC"
+    dir C:\
   displayName: 'Run a multi-line script'
   
 - bash: |
     echo I am a bash script
     ls -al
+    ls -al /
   displayName: 'Run a bash script'
