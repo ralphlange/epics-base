@@ -17,4 +17,11 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     dir
     dir C:\Windows
+    dir "C:\Program Files (x86)\Microsoft Visual Studio 2017"
+    dir "C:\Program Files (x86)\Microsoft Visual Studio 2017\VC"
   displayName: 'Run a multi-line script'
+  
+- bash: |
+    echo I am a bash script
+    ls -al
+  displayName: 'Run a bash script'
