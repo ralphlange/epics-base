@@ -75,4 +75,4 @@ html_extra_path = ['O.linux-x86_64/html']
 # -- Run Doxygen via make ----------------------------------------------------
 
 import subprocess
-subprocess.call('make', shell=True)
+subprocess.call('cd ..; make; make -C documentation', shell=True)
