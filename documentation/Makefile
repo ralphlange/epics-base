@@ -20,7 +20,7 @@ install: doxygen
 
 doxygen: Doxyfile ../mainpage.dox
 	$(DOXYGEN)
-	rsync -av $(TOP)/html/ html/
+	cp -a $(TOP)/html/* html/
 
 .PHONY: doxygen
 
