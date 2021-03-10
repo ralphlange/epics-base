@@ -69,10 +69,10 @@ html_theme_options = {
 }
 html_logo = "images/EPICS_white_logo_v02.png"
 
-html_extra_path = ['../html']
+html_extra_path = ['O.linux-x86_64/html']
 
 
-# -- Run Doxygen ------------------------------------------------------------
+# -- Run Doxygen via make ----------------------------------------------------
 
 import subprocess
-subprocess.call('cd ..; mkdir -p html/doxygen; doxygen', shell=True)
+subprocess.call('make', shell=True)
