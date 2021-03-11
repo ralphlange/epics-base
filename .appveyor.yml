@@ -137,7 +137,7 @@ notifications:
 
   - provider: Email
     to:
-      - core-talk@aps.anl.gov
+      - ralph.lange@gmx.de
     on_build_success: false
 
   - provider: GitHubPullRequest
