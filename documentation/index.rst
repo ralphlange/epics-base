@@ -12,5 +12,5 @@ EPICS Base
    :maxdepth: 1
    :caption: Base
 
-   Reference Manual and API Documentation <https://docs.epics-controls.org/projects/epics-base/en/latest/>
+   :doc:`Base Reference and API Documentation <./base>`
    Source Code Repository on GitHub <https://github.com/epics-base/epics-base>
