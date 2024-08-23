@@ -203,6 +203,7 @@ public:
     void destroyIIU ( tcpiiu & iiu );
 
     const char * pLocalHostName ();
+    const bool useSearchBuckets;
 
 private:
     epicsSingleton < localHostName > :: reference _refLocalHostName;

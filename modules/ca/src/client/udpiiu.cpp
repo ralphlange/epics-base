@@ -158,10 +158,15 @@ udpiiu::udpiiu (
         this->beaconAnomalyTimerIndex = this->nTimers - 1;
     }
 
-    for ( unsigned i = 0; i < this->nTimers; i++ ) {
-        this->ppSearchTmr[i].reset (
-            new searchTimer ( *this, timerQueue, i, cacMutexIn,
-                i > this->beaconAnomalyTimerIndex ) );
+    if (cacRef.useSearchBuckets) {
+        this->search = new searchBuckets(*this,
+                                         timerQueue,
+                                         cacMutexIn);
+    } else {
+        for (unsigned i = 0; i < this->nTimers; i++) {
+            this->ppSearchTmr[i].reset(
+                new searchTimer(*this, timerQueue, i, cacMutexIn, i > this->beaconAnomalyTimerIndex));
+        }
     }
 
     this->repeaterPort =
@@ -300,10 +305,14 @@ udpiiu::udpiiu (
     this->pushVersionMsg ();
 
     // start timers and receive thread
-    for ( unsigned j =0; j < this->nTimers; j++ ) {
-        this->ppSearchTmr[j]->start ( cacGuard );
+    if (cac.useSearchBuckets) {
+        this->search->start(cacGuard);
+    } else {
+        for (unsigned j = 0; j < this->nTimers; j++) {
+            this->ppSearchTmr[j]->start(cacGuard);
+        }
     }
-    this->govTmr.start ();
+    this->govTmr.start();
     this->repeaterSubscribeTmr.start ();
     this->recvThread.start ();
 }
@@ -337,8 +346,12 @@ void udpiiu::shutdown (
     // stop all of the timers
     this->repeaterSubscribeTmr.shutdown ( cbGuard, guard );
     this->govTmr.shutdown ( cbGuard, guard );
-    for ( unsigned i =0; i < this->nTimers; i++ ) {
-        this->ppSearchTmr[i]->shutdown ( cbGuard, guard );
+    if (cacRef.useSearchBuckets) {
+        this->search->shutdown(cbGuard, guard);
+    } else {
+        for (unsigned i = 0; i < this->nTimers; i++) {
+            this->ppSearchTmr[i]->shutdown(cbGuard, guard);
+        }
     }
 
     {
@@ -1168,8 +1181,12 @@ void udpiiu :: show ( unsigned level ) const
         this->govTmr.show ( level - 2u );
     }
     if ( level > 3u ) {
-        for ( unsigned i =0; i < this->nTimers; i++ ) {
-            this->ppSearchTmr[i]->show ( level - 3u );
+        if (cacRef.useSearchBuckets) {
+            this->search->show(level - 3u);
+        } else {
+            for ( unsigned i =0; i < this->nTimers; i++ ) {
+                this->ppSearchTmr[i]->show ( level - 3u );
+            }
         }
     }
 }
@@ -1198,10 +1215,14 @@ bool udpiiu::wakeupMsg ()
 void udpiiu::beaconAnomalyNotify (
     epicsGuard < epicsMutex > & cacGuard )
 {
+    if (cacRef.useSearchBuckets) {
+        this->search->hurryUp(cacGuard);
+    } else {
     for ( unsigned i = this->beaconAnomalyTimerIndex+1u;
             i < this->nTimers; i++ ) {
         this->ppSearchTmr[i]->moveChannels ( cacGuard,
             *this->ppSearchTmr[this->beaconAnomalyTimerIndex] );
+    }
     }
 }
 
@@ -1213,12 +1234,21 @@ void udpiiu::uninstallChanDueToSuccessfulSearchResponse (
         chan.channelNode::listMember;
     if ( chanState == channelNode::cs_disconnGov ) {
         this->govTmr.uninstallChan ( guard, chan );
-    }
-    else {
-        this->ppSearchTmr[ chan.getSearchTimerIndex ( guard ) ]->
-            uninstallChanDueToSuccessfulSearchResponse (
-            guard, chan, this->lastReceivedSeqNo,
-            this->lastReceivedSeqNoIsValid, currentTime );
+    } else {
+        if (cacRef.useSearchBuckets) {
+            this->search->uninstallChanDueToSuccessfulSearchResponse(guard,
+                                                                     chan,
+                                                                     this->lastReceivedSeqNo,
+                                                                     this->lastReceivedSeqNoIsValid,
+                                                                     currentTime);
+        } else {
+            this->ppSearchTmr[chan.getSearchTimerIndex(guard)]
+                ->uninstallChanDueToSuccessfulSearchResponse(guard,
+                                                             chan,
+                                                             this->lastReceivedSeqNo,
+                                                             this->lastReceivedSeqNoIsValid,
+                                                             currentTime);
+        }
     }
 }
 
@@ -1231,8 +1261,12 @@ void udpiiu::uninstallChan (
         this->govTmr.uninstallChan ( guard, chan );
     }
     else {
-        this->ppSearchTmr[ chan.getSearchTimerIndex ( guard ) ]->
+        if (cacRef.useSearchBuckets) {
+            this->search->uninstallChan(guard, chan);
+        } else {
+            this->ppSearchTmr[ chan.getSearchTimerIndex ( guard ) ]->
             uninstallChan ( guard, chan );
+        }
     }
 }
 
@@ -1254,7 +1288,11 @@ void udpiiu::installNewChannel (
     epicsGuard < epicsMutex > & guard, nciu & chan, netiiu * & piiu )
 {
     piiu = this;
-    this->ppSearchTmr[0]->installChannel ( guard, chan );
+    if (cacRef.useSearchBuckets) {
+        this->search->installChannel(guard, chan);
+    } else {
+        this->ppSearchTmr[0]->installChannel(guard, chan);
+    }
 }
 
 void udpiiu::installDisconnectedChannel (
@@ -1287,7 +1325,11 @@ void udpiiu::boostChannel (
 void udpiiu::govExpireNotify (
     epicsGuard < epicsMutex > & guard, nciu & chan )
 {
-    this->ppSearchTmr[0]->installChannel ( guard, chan );
+    if (cacRef.useSearchBuckets) {
+        this->search->installChannel(guard, chan);
+    } else {
+        this->ppSearchTmr[0]->installChannel(guard, chan);
+    }
 }
 
 int udpiiu :: M_repeaterTimerNotify :: printFormated (

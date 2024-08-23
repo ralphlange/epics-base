@@ -11,6 +11,8 @@ TOP = ../../../..
 
 include $(TOP)/configure/CONFIG
 
+USR_CXXFLAGS += -DDEBUG
+
 HTMLS += CAref.html
 
 #
@@ -47,6 +49,7 @@ LIBSRCS += convert.cpp
 LIBSRCS += test_event.cpp
 LIBSRCS += repeater.cpp
 LIBSRCS += searchTimer.cpp
+LIBSRCS += searchBuckets.cpp
 LIBSRCS += disconnectGovernorTimer.cpp
 LIBSRCS += repeaterSubscribeTimer.cpp
 LIBSRCS += baseNMIU.cpp

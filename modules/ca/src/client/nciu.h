@@ -111,6 +111,7 @@ private:
     friend class udpiiu;
     friend class tcpSendThread;
     friend class searchTimer;
+    friend class searchBuckets;
     friend class disconnectGovernorTimer;
 };
 

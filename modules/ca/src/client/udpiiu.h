@@ -36,6 +36,7 @@
 #include "libCaAPI.h"
 #include "netiiu.h"
 #include "searchTimer.h"
+#include "searchBuckets.h"
 #include "disconnectGovernorTimer.h"
 #include "repeaterSubscribeTimer.h"
 #include "SearchDest.h"
@@ -181,6 +182,7 @@ private:
         SearchArray(const SearchArray&);
         SearchArray& operator=(const SearchArray&);
     } ppSearchTmr;
+    searchBuckets *search;
     unsigned nBytesInXmitBuf;
     unsigned beaconAnomalyTimerIndex;
     ca_uint32_t sequenceNumber;
